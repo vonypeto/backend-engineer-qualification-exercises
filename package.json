@@ -19,7 +19,8 @@
     "typescript": "^3.8.3"
   },
   "scripts": {
-    "test": "TS_NODE_PROJECT=tsconfig.json TS_NODE_FILES=true mocha \"./**/*.spec.ts\""
+    "test": "TS_NODE_PROJECT=tsconfig.json TS_NODE_FILES=true mocha \"./**/*.spec.ts\"",
+    "test-run": "npx mocha --require ts-node/register --project tsconfig.json \"./**/*.spec.ts\""
   },
   "repository": {
     "type": "git",
