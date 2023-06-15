@@ -1,6 +1,3 @@
-import { DateTime } from "luxon";
-import R from "ramda";
-import fs from "fs";
 /**
  * Calculates the ratio between the amount of time when status is AVAILABLE and
  * the amount of time between startDateTime inclusive and endDateTime exclusive.
