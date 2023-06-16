@@ -1,4 +1,4 @@
-import express, { Response } from "express";
+import express, { Request, Response } from "express";
 import NodeCache from "node-cache";
 import { availability, outages } from "./exercise2";
 import logest from "./exercise3";
@@ -11,18 +11,18 @@ const myCache = new NodeCache();
 const app = express();
 const port = 5000;
 
-app.get("/", (res: Response) => {
+app.get("/", (req: Request, res: Response) => {
   res.send("Hello, TypeScript server!");
 });
 
-app.get("/setcache", (res: Response) => {
+app.get("/setcache", (req: Request, res: Response) => {
   myCache.set("key", { first: "hello" });
   myCache.set("2", { first: "everybody" });
 
   res.send("set cache");
 });
 
-app.get("/getcache", (res: Response) => {
+app.get("/getcache", (req: Request, res: Response) => {
   const cachedValue = myCache.get<{ first: string }>("key");
   const cachedValue2 = myCache.get<{ first: string }>("2");
 
@@ -31,7 +31,7 @@ app.get("/getcache", (res: Response) => {
   res.send({ cachedValue, cachedValue2 } || { cache: "not found" });
 });
 
-app.get("/avail", (res: Response) => {
+app.get("/avail", (req: Request, res: Response) => {
   const startDateTime = new Date("2023-06-15T09:00:00");
   const endDateTime = new Date("2023-06-15T17:00:00");
   const cases: {
@@ -113,7 +113,7 @@ app.get("/avail", (res: Response) => {
   res.send({ result1, resultOutsideLoop });
 });
 
-app.get("/ys", (res: Response) => {
+app.get("/ys", (req: Request, res: Response) => {
   function calculateLogest(ys: number[]): number {
     const result = logest(ys);
     return result;
