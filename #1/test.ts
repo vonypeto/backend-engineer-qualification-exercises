@@ -13,7 +13,7 @@ async function main() {
   const result = await cache.exec("hello");
   console.log(result);
 }
-
+// Call main function
 main().catch((error) => {
   console.error(error);
 });

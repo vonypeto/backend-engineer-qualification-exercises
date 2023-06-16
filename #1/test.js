@@ -36,38 +36,43 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-var _1 = require(".");
-// Instantiate an instance of the CacheHandler class
-function main() {
+var _1 = require("./");
+function delay(ms) {
+    return new Promise(function (resolve) { return setTimeout(resolve, ms); });
+}
+// Simulated asynchronous data fetching function
+function fetchDataFromSource() {
     return __awaiter(this, void 0, void 0, function () {
-        var cache, result;
-        var _this = this;
+        var data;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0:
-                    cache = new _1["default"](function (arg) { return __awaiter(_this, void 0, void 0, function () {
-                        return __generator(this, function (_a) {
-                            switch (_a.label) {
-                                case 0: 
-                                // Simulate some asynchronous operation
-                                return [4 /*yield*/, new Promise(function (resolve) { return setTimeout(resolve, 2000); })];
-                                case 1:
-                                    // Simulate some asynchronous operation
-                                    _a.sent();
-                                    // Return a value based on the input argument
-                                    return [2 /*return*/, "Processed: ".concat(arg)];
-                            }
-                        });
-                    }); }, 5000);
-                    return [4 /*yield*/, cache.exec("hello")];
+                case 0: 
+                // Simulating a delay for demonstration purposes
+                return [4 /*yield*/, delay(1000)];
                 case 1:
-                    result = _a.sent();
-                    console.log(result);
-                    return [2 /*return*/];
+                    // Simulating a delay for demonstration purposes
+                    _a.sent();
+                    data = "This is the fetched data";
+                    return [2 /*return*/, data];
             }
         });
     });
 }
-main()["catch"](function (error) {
-    console.error(error);
+// Create an instance of CacheHandler
+var cache = new _1["default"](fetchDataFromSource, 60); // Set a timeout of 60 seconds
+// Fetch data using the cache
+cache
+    .exec()
+    .then(function (data) {
+    console.log("Data:", data);
+})["catch"](function (error) {
+    console.error("Error:", error);
+});
+// Fetch cached data directly
+cache
+    .fetchCache()
+    .then(function (cachedData) {
+    console.log("Cached Data:", cachedData);
+})["catch"](function (error) {
+    console.error("Error:", error);
 });
